@@ -178,7 +178,7 @@ node-red
 
 | Parámetro | Valor por Defecto | Configurable en |
 |-----------|-------------------|-----------------|
-| Humedad suelo mínima (encender bomba) | 30% | `config.h` |
+| Humedad suelo mínima (encender bomba) | 40% | `config.h` |
 | Humedad suelo máxima (apagar bomba) | 45% | `config.h` |
 | Temperatura máxima (abrir ventilación) | 30°C | `config.h` |
 | Temperatura mínima (cerrar ventilación) | 27°C | `config.h` |
