@@ -1,0 +1,21 @@
+{
+    "folders": [
+        {
+            "name": "firmware (ESP32)",
+            "path": "firmware"
+        },
+        {
+            "name": "docs",
+            "path": "docs"
+        },
+        {
+            "name": "hardware",
+            "path": "hardware"
+        }
+    ],
+    "settings": {
+        "git.ignoreLimitWarning": true,
+        "C_Cpp.intelliSenseEngine": "default",
+        "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+    }
+}
