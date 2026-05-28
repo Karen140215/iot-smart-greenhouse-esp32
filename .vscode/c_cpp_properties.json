@@ -1,0 +1,67 @@
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "C:/Users/karen/OneDrive/Escritorio/proyecto-final-sistemas-embebidos/firmware/include",
+                "C:/Users/karen/OneDrive/Escritorio/proyecto-final-sistemas-embebidos/firmware/src",
+                "C:/Users/karen/OneDrive/Escritorio/proyecto-final-sistemas-embebidos/firmware/.pio/libdeps/esp32dev/ESP32Servo/src",
+                "C:/Users/karen/OneDrive/Escritorio/proyecto-final-sistemas-embebidos/firmware/.pio/libdeps/esp32dev/ArduinoJson/src",
+                "C:/Users/karen/OneDrive/Escritorio/proyecto-final-sistemas-embebidos/firmware/.pio/libdeps/esp32dev/PubSubClient/src",
+                "C:/Users/karen/OneDrive/Escritorio/proyecto-final-sistemas-embebidos/firmware/.pio/libdeps/esp32dev/DHT sensor library",
+                "C:/Users/karen/OneDrive/Escritorio/proyecto-final-sistemas-embebidos/firmware/.pio/libdeps/esp32dev/Adafruit Unified Sensor",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/cores/esp32",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/variants/esp32",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_common/include",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_system/include",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp32/include",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/driver/include",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/nvs_flash/include",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_wifi/include",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/log/include",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/include",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/xtensa/include",
+                "${workspaceFolder}/firmware/include",
+                "${workspaceFolder}/firmware/src",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/cores/esp32",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/variants/esp32",
+                "C:/Users/karen/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include",
+                "${workspaceFolder}/firmware/.pio/libdeps/esp32dev"
+            ],
+            "defines": [
+                "ARDUINO_ARCH_ESP32",
+                "ESP32",
+                "ARDUINO=10812",
+                "F_CPU=240000000L",
+                "MQTT_MAX_PACKET_SIZE=512",
+                "ESP_PLATFORM"
+            ],
+            "compilerPath": "C:/Users/karen/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc.exe",
+            "compilerArgs": [
+                "-mlongcalls"
+            ],
+            "cStandard": "gnu99",
+            "cppStandard": "gnu++11",
+            "intelliSenseMode": "gcc-x64"
+        },
+        {
+            "name": "P1",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.26100.0",
+            "compilerPath": "cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}
