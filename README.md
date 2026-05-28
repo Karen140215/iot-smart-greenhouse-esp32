@@ -103,51 +103,138 @@ proyecto-final-sistemas-embebidos/
 
 ---
 
-## Instalación Rápida
+## Instrucciones de Instalación
 
-### 1. Firmware ESP32
+### Requisitos previos
+
+- [Visual Studio Code](https://code.visualstudio.com/) con la extensión **PlatformIO IDE** instalada
+- [Node.js](https://nodejs.org) (versión LTS recomendada)
+- [Mosquitto MQTT Broker](https://mosquitto.org/download/) instalado en Windows
+- Placa ESP32-WROOM-32 conectada por USB
+
+### 1. Clonar o descargar el repositorio
 
 ```bash
-# Abrir el proyecto en VS Code con PlatformIO
-# Editar firmware/include/config.h con:
-#   - WIFI_SSID y WIFI_PASSWORD
-#   - MQTT_BROKER_IP (IP del PC con Mosquitto)
-
-# Calibrar sensor de suelo (opcional, solo si cambia el hardware):
-#   1. Poner MODO_CALIBRACION 1 en config.h
-#   2. Compilar y cargar, abrir Monitor Serial a 115200 bps
-#   3. Registrar valor ADC en seco y en agua
-#   4. Actualizar SOIL_ADC_SECO y SOIL_ADC_MOJADO en config.h
-#   5. Poner MODO_CALIBRACION 0 y volver a compilar
-
-# Compilar y cargar:
-pio run --target upload
-# Monitorear serial:
-pio device monitor
+git clone https://github.com/Karen140215/iot-smart-greenhouse-esp32.git
 ```
 
-### 2. Broker Mosquitto (Windows)
+O descargar el ZIP desde GitHub y extraer en una carpeta local.
+
+### 2. Instalar y configurar Mosquitto (Broker MQTT)
 
 ```bash
 # Instalar Mosquitto desde: https://mosquitto.org/download/
-# Iniciar el servicio:
+# Luego iniciar el servicio en Windows:
 net start mosquitto
-# Verificar con:
+
+# Verificar que el broker esté funcionando:
 mosquitto_sub -t "cultivo/#" -v
 ```
 
-### 3. Node-RED
+> Asegúrate de que el firewall de Windows permita conexiones en el puerto **1883**.
+
+### 3. Instalar Node-RED y el Dashboard
 
 ```bash
-# Instalar Node.js desde: https://nodejs.org
-# Instalar Node-RED:
+# Instalar Node-RED globalmente:
 npm install -g --unsafe-perm node-red
-# Instalar dashboard:
+
+# Instalar el módulo de dashboard:
 npm install -g node-red-dashboard
-# Iniciar:
+
+# Iniciar Node-RED:
 node-red
-# Importar el flow desde: iot/nodered_flow.json
 ```
+
+Luego abrir el navegador en `http://localhost:1880` e importar el flow desde `iot/nodered_flow.json` usando el menú **Importar** de Node-RED.
+
+### 4. Configurar el firmware
+
+Abrir el archivo `firmware/include/config.h` y editar las siguientes líneas con los datos de tu red:
+
+```cpp
+#define WIFI_SSID       "nombre_de_tu_red"
+#define WIFI_PASSWORD   "contraseña_de_tu_red"
+#define MQTT_BROKER_IP  "192.168.X.X"   // IP del PC donde corre Mosquitto
+```
+
+### 5. Compilar y cargar el firmware en el ESP32
+
+Abrir la carpeta `firmware/` en VS Code con PlatformIO y ejecutar:
+
+```bash
+# Compilar y cargar:
+pio run --target upload
+```
+
+Las librerías se descargan automáticamente desde `platformio.ini` — no se necesita instalar nada manualmente.
+
+---
+
+## Instrucciones de Ejecución
+
+Una vez completada la instalación, seguir este orden de arranque:
+
+**1. Iniciar Mosquitto** (si no está corriendo como servicio):
+```bash
+net start mosquitto
+```
+
+**2. Iniciar Node-RED:**
+```bash
+node-red
+```
+Abrir `http://localhost:1880` en el navegador y hacer clic en **Deploy** para activar el flow.
+
+**3. Encender el ESP32:**
+- Conectar la alimentación externa (5V) para el servo y la bomba.
+- Conectar el ESP32 por USB o fuente independiente.
+- El ESP32 se conectará automáticamente al WiFi y al broker MQTT.
+
+**4. Verificar la conexión en el Monitor Serial** (opcional):
+```bash
+pio device monitor
+```
+Deberías ver mensajes como:
+```
+[WiFi] Conectado. IP: 192.168.X.X
+[MQTT] Conectado al broker.
+[Sensor] Temp: 25.3°C  Humedad aire: 60%  Humedad suelo: 48%
+```
+
+**5. Abrir el Dashboard:**
+- Ir a `http://localhost:1880/ui` en el navegador o desde el celular (misma red WiFi).
+- El dashboard mostrará los datos en tiempo real y los botones de control manual.
+
+**Modos de operación:**
+- **AUTO:** el sistema controla riego y ventilación automáticamente según los umbrales definidos en `config.h`.
+- **MANUAL:** se puede activar o desactivar la bomba y el servo desde el dashboard.
+
+---
+
+## Librerías Utilizadas
+
+Todas las librerías se gestionan automáticamente con PlatformIO a través del archivo `firmware/platformio.ini`.
+
+| Librería | Versión | Autor | Uso en el proyecto |
+|----------|---------|-------|--------------------|
+| **DHT sensor library** | ^1.4.6 | Adafruit | Lectura de temperatura y humedad relativa del sensor DHT11 |
+| **Adafruit Unified Sensor** | ^1.1.14 | Adafruit | Capa de abstracción base requerida por la librería DHT |
+| **PubSubClient** | ^2.8.0 | knolleary | Cliente MQTT para publicar datos y recibir comandos desde el broker Mosquitto |
+| **ArduinoJson** | ^6.21.5 | bblanchon | Serialización y deserialización de mensajes JSON en los tópicos MQTT |
+| **ESP32Servo** | ^3.0.0 | madhephaestus | Control del servomotor MG995 mediante señal PWM en el ESP32 |
+
+### Descripción detallada
+
+- **DHT sensor library:** Permite leer temperatura y humedad del sensor DHT11 con una sola línea de datos. Incluye validación de lecturas y manejo de errores de comunicación.
+
+- **Adafruit Unified Sensor:** Librería base de Adafruit que estandariza la interfaz de sensores. Es una dependencia obligatoria de la librería DHT.
+
+- **PubSubClient:** Implementa el protocolo MQTT v3.1.1 sobre WiFi. Permite publicar mensajes en tópicos, suscribirse a comandos remotos y gestionar la reconexión automática al broker.
+
+- **ArduinoJson:** Utilizada para construir los payloads JSON que se publican en `cultivo/sensores` y para parsear los comandos JSON recibidos en `cultivo/comando/*` (riego, servo, modo).
+
+- **ESP32Servo:** Librería específica para ESP32 que usa los timers del hardware para generar la señal PWM del servo, evitando conflictos con otros periféricos del microcontrolador.
 
 ---
 
