@@ -6,9 +6,9 @@
 
 ---
 
-## Estructura Sugerida de Presentación (20–30 minutos)
+## Estructura Sugerida de Presentación 
 
-### Bloque 1: Introducción (3–4 minutos)
+### Bloque 1: Introducción.
 
 **Puntos clave a mencionar:**
 
@@ -26,7 +26,7 @@
 
 ---
 
-### Bloque 2: Hardware y Conexiones (4–5 minutos)
+### Bloque 2: Hardware y Conexiones 
 
 **Explicar:**
 
@@ -45,7 +45,7 @@
 
 ---
 
-### Bloque 3: Arquitectura del Firmware (5–6 minutos)
+### Bloque 3: Arquitectura del Firmware
 
 **Puntos técnicos a dominar:**
 
@@ -63,7 +63,7 @@
 
 ---
 
-### Bloque 4: Protocolo MQTT (3–4 minutos)
+### Bloque 4: Protocolo MQTT 
 
 **Explicar el protocolo:**
 
@@ -83,7 +83,7 @@ mosquitto_pub -t "cultivo/comando/riego" -m '{"accion":"ON"}'
 
 ---
 
-### Bloque 5: Dashboard Node-RED (4–5 minutos)
+### Bloque 5: Dashboard Node-RED 
 
 **Demostración en vivo:**
 
@@ -96,7 +96,7 @@ mosquitto_pub -t "cultivo/comando/riego" -m '{"accion":"ON"}'
 
 ---
 
-### Bloque 6: Validación y Pruebas (3–4 minutos)
+### Bloque 6: Validación y Pruebas 
 
 **Pruebas realizadas:**
 
@@ -112,7 +112,7 @@ mosquitto_pub -t "cultivo/comando/riego" -m '{"accion":"ON"}'
 
 ---
 
-### Bloque 7: Conclusiones y Mejoras Futuras (2–3 minutos)
+### Bloque 7: Conclusiones y Mejoras Futuras
 
 **Conclusiones:**
 
